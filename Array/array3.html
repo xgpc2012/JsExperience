@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组判断</title>
+</head>
+<body>
+
+</body>
+<script>
+    //自带的isArray方法
+    var arr1 = [];
+    console.log(Array.isArray(arr1));//true
+
+    //利用instanceof运算符
+    var arr2=[];
+    console.log(arr2 instanceof Array);//true
+
+    //利用toString的返回值
+    var arr3=[];
+    function isArray(o) {
+        return Object.prototype.toString.call(o) === "[object Array]";
+    }
+    console.log(isArray(arr3));
+</script>
+</html>

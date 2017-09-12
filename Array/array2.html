@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组顺序扰乱</title>
+</head>
+<body>
+
+</body>
+<script>
+    var arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    var arr2 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    var arr3 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    //每次随机抽一个数并移动到新数组中
+    function shuffle1(array) {
+        var copy = [],
+                n = array.length,
+                i;
+        // 如果还剩有元素则继续
+        while (n) {
+            // 随机抽取一个元素
+            i = Math.floor(Math.random() * array.length);
+            // 如果这个元素之前没有被选中过
+            if (i in array) {
+                copy.push(array[i]);
+                delete array[i];
+                n--;
+            }
+        }
+        return copy;
+    }
+    console.log(shuffle1(arr1));
+
+    //跟方法1类似，只不过通过splice来去掉原数组已选项
+    function shuffle2(array) {
+        var copy = [],
+                n = array.length,
+                i;
+        // 如果还剩有元素
+        while (n) {
+            // 随机选取一个元素
+            i = Math.floor(Math.random() * n--);
+            // 移动到新数组中
+            copy.push(array.splice(i, 1)[0]);
+        }
+        return copy;
+    }
+    console.log(shuffle2(arr2));
+
+    //前面随机抽数依次跟末尾的数交换，后面依次前移
+    //即：第一次前n个数随机抽一个跟第n个交换，第二次前n-1个数跟第n-1个交换，依次类推。
+    function shuffle3(array) {
+        var m = array.length,
+                t, i;
+        // 如果还剩有元素
+        while (m) {
+            // 随机选取一个元素
+            i = Math.floor(Math.random() * m--);
+            // 与当前元素进行交换
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t;
+        }
+        return array;
+    }
+    console.log(shuffle3(arr3));
+</script>
+</html>

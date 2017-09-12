@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组统计</title>
+</head>
+<body>
+
+</body>
+<script>
+    var arr = [1, 1, 2, 3, "3", 3, 3, 3, 4, 5, 6, 7, 8, 9, 10];
+    //统计某个元素在数组中出现的个数
+    //是全等比较 传入字符串和数字是不一样的！！！
+    function countTimes(array, key) {
+        var j = array.indexOf(key);
+        var times = j == -1 ? 0 : 1;
+        var len = array.length;
+        if (times) {
+            while (j < len - 1 && j != -1) {
+                j = array.indexOf(key, j + 1);
+                times = j < 0 ? times : times + 1;
+            }
+        }
+        return times;
+    }
+    console.log(countTimes(arr, 3));
+</script>
+</html>

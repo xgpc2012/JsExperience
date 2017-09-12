@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组去重</title>
+</head>
+<body>
+</body>
+<script>
+    //数组去重方法
+    var arr1 = [3, 2, 2, 4, 6, 7, 6, 8, 9, 3, 0];
+    var arr2 = [3, 2, 2, 4, 6, 7, 6, 8, 9, 3, 0];
+    //1、利用数组的indexOf方法
+    //注:数组的indexOf方法IE8及以下不支持！！！！！
+    function unique1(arr) {
+        var result = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (result.indexOf(arr[i]) == -1) {
+                result.push(arr[i]);
+            }
+        }
+        return result;
+    }
+    console.log(unique1(arr1));//[3, 2, 4, 6, 7, 8, 9, 0]
+
+    //2、利用hash表
+    function unique2(arr) {
+        var hash = {}, result = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (!hash[arr[i]]) {
+                hash[arr[i]] = true;
+                result.push(arr[i]);
+            }
+        }
+        return result;
+    }
+    console.log(unique2(arr1));//[3, 2, 4, 6, 7, 8, 9, 0]
+
+    //3、排序后比较相邻，如果一样则放弃，否则加入到result,原数组被排序
+    function unique3(arr) {
+        //sort方法按照字符串来排序，所以需要定义比较方法
+        arr.sort(function (a, b) {
+            return a - b;
+        });
+        var result = [arr[0]];
+        for (var i = 1; i < arr.length; i++) {
+            if (arr[i] != arr[i - 1]) {
+                result.push(arr[i]);
+            }
+        }
+        return result;
+    }
+    console.log(unique3(arr2));//[0, 2, 3, 4, 6, 7, 8, 9]
+</script>
+</html>
