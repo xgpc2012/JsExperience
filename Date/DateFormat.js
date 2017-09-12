@@ -26,3 +26,7 @@ Date.prototype.format = function(fmt) {
 
     return fmt;
 };
+
+var date1=new Date();
+console.log(date1.format("yyyyMMddhhmmss"))
+console.log(date1.format("yyyyMMdd"))
