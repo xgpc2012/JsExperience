@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件委托</title>
+</head>
+<body>
+<ul id="myLinks">
+    <li id="goSomewhere">Go somewhere</li>
+    <li id="doSomething">Do something</li>
+    <li id="sayHi">Say hi</li>
+</ul>
+<script src="js/event.js"></script>
+<script>
+    //使用事件委托，只需在DOM 树中尽量最高的层次上添加一个事件处理程序，可以提升性能
+    var item1 = document.getElementById("goSomewhere");
+    var item2 = document.getElementById("doSomething");
+    var item3 = document.getElementById("sayHi");
+    EventUtil.addHandler(item1, "click", function(event){
+        location.href = "http://www.wrox.com";
+    });
+    EventUtil.addHandler(item2, "click", function(event){
+        document.title = "I changed the document's title";
+    });
+    EventUtil.addHandler(item3, "click", function(event){
+        alert("hi");
+    });
+</script>
+</html>

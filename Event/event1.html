@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理程序</title>
+    <link href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.3/css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<!--HTML事件处理程序-->
+<body>
+<div id="myDiv">
+    <!--HTML事件处理程序-->
+    <button id="btn1" onclick="alert('&quot;你点击了button&quot;')">我是第一个button</button>
+    <button id="btn2" onclick="alert(this.value)" value="我是一个button">我是第二个button</button>
+    <button id="btn3" onclick="msg()" value="我是一个button">我是第三个button</button>
+    <!--这里的this能访问到 代表目标元素-->
+    <button id="btn4" onclick="alert(name);" name="我是一个button">我是第四个button</button>
+    <button id="btn45" onclick="alert(name);" name="我是第4.5个button">我是第4.5个button</button>
+    <button id="btn5" onclick="alert(event.type);">我是第五个button</button>
+    <button id="btn6" value="第6个">我是第六个button</button>
+</div>
+</body>
+<script>
+    //1、HTML事件处理程序
+    //通过 HTML 指定事件处理程序的最后一个缺点是 HTML 与 JavaScript 代码紧密耦合。
+    //如果要更换事件处理程序，就要改动两个地方： HTML 代码和 JavaScript 代码。
+    //而这正是许多开发人员摒弃 HTML 事件处理程序，转而使用 JavaScript 指定事件处理程序的原因所在。
+    function msg() {
+        //这里的this指向了window！！！！！！！！！
+        alert(this.value);
+    }
+    //2.DOM0 级事件处理程序
+    //使用 DOM0 级方法指定的事件处理程序被认为是元素的方法。
+    //因此，这时候的事件处理程序是在 元素的作用域中运行；换句话说，程序中的 this 引用当前元素。
+    var btn6=document.getElementById("btn6");
+    btn6.onclick= function () {
+        alert("我是第六个button哟");
+    }
+    //后面的会覆盖前面的
+    btn6.onclick= function () {
+        alert(this.value);
+    }
+    //删除DOM0级事件
+    //btn6.onclick=null;
+    //HTML事件也可以修改事件属性值为null注销事件
+    document.getElementById("btn5").onclick=null;
+</script>
+</html>

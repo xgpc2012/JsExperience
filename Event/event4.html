@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跨浏览器的事件处理程序</title>
+    <link href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.3/css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div id="myDiv">
+    <button id="btn1">我是第一个button</button>
+    <button id="btn2">我是第二个button</button>
+    <button id="btn3" value="我是一个button">我是第三个button</button>
+</div>
+</body>
+<script>
+    //跨浏览器的事件处理程序
+    var EventUtil = {
+        //添加事件
+        addHandler: function (element, type, handler) {
+            if (element.addEventListener) {
+                element.addEventListener(type, handler, false);
+            } else if (element.attachEvent) {
+                element.attachEvent("on" + type, handler);
+            } else {
+                element["on" + type] = handler;
+            }
+        },
+        getEvent: function (event) {
+            return event ? event : window.event;
+        },
+        getTarget: function (event) {
+            return event.target || event.srcElement;
+        },
+        preventDefault: function (event) {
+            if (event.preventDefault) {
+                event.preventDefault();
+            } else {
+                event.returnValue = false;
+            }
+        },
+        //移除事件
+        removeHandler: function (element, type, handler) {
+            if (element.removeEventListener) {
+                element.removeEventListener(type, handler, false);
+            } else if (element.detachEvent) {
+                element.detachEvent("on" + type, handler);
+            } else {
+                element["on" + type] = null;
+            }
+        },
+        stopPropagation: function (event) {
+            if (event.stopPropagation) {
+                event.stopPropagation();
+            } else {
+                event.cancelBubble = true;
+            }
+        }
+    };
+    var btn1=document.getElementById("btn1");
+    EventUtil.addHandler(btn1,"click", function () {
+        alert("!");
+    });
+    //页面卸载前触发
+    EventUtil.addHandler(window, "beforeunload", function(event){
+        event = EventUtil.getEvent(event);
+        var message = "I'm really going to miss you if you go.";
+        event.returnValue = message;
+        console.log(message);
+        return message;
+    });
+    //DOM树生成完毕的时候触发
+    EventUtil.addHandler(document, "DOMContentLoaded", function(event){
+        alert("Content loaded");
+    });
+</script>
+</html>

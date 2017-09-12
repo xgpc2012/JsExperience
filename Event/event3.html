@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IE事件处理程序</title>
+    <link href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.3/css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div id="myDiv">
+    <button id="btn1">我是第一个button</button>
+    <button id="btn2">我是第二个button</button>
+    <button id="btn3" value="我是一个button">我是第三个button</button>
+</div>
+</body>
+<script>
+    var btn1 = document.getElementById("btn1");
+    var btn2 = document.getElementById("btn2");
+    var btn3 = document.getElementById("btn3");
+    //通过attachEvent添加的事件都会被添加到冒泡阶段
+    //事件名称是用onclick！！！！！！！！！
+    //IE/Opera专用事件，后绑定先触发
+    //在 IE 中使用 attachEvent() 与使用 DOM0 级方法的主要区别在于事件处理程序的作用域。
+    //下面一条很重要
+    //在使用 attachEvent() 方法的情况下，事件处理程序会在全局作用域中运行，因此 this 等于 window。
+    btn1.attachEvent("onclick", function () {
+        alert("Clicked");
+        //这里的this指向的是window而不是目标元素
+        console.log(this===window);//true
+    });
+    btn1.attachEvent("onclick", function () {
+        alert("Clicked2");
+    });
+
+    var handler = function(){
+        alert("Clicked");
+    };
+    btn2.attachEvent("onclick", handler);
+    //detach移除绑定的特定函数
+    btn2.detachEvent("onclick", handler);
+</script>
+</html>
