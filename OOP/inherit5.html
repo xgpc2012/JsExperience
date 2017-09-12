@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prototypal Inheritance in JavaScript</title>
+</head>
+<body>
+
+</body>
+<script>
+    //原型式继承
+    function object(o) {
+        function F() {
+        }
+
+        F.prototype = o;
+        return new F();
+    }
+
+    //    var person = {
+    //        name: "Nicholas",
+    //        friends: ["Shelby", "Court", "Van"]
+    //    };
+    //    var anotherPerson = object(person);
+    //    anotherPerson.name = "Greg";
+    //    anotherPerson.friends.push("Rob");
+    //    var yetAnotherPerson = object(person);
+    //    yetAnotherPerson.name = "Linda";
+    //    yetAnotherPerson.friends.push("Barbie");
+    //    console.log(person.friends); //"Shelby,Court,Van,Rob,Barbie"
+
+    var person = {
+        name: "Nicholas",
+        friends: ["Shelby", "Court", "Van"]
+    };
+    //Object IE9+支持 第二个参数重写原型对象上的属性
+    var anotherPerson = Object.create(person);
+    anotherPerson.name = "Greg";
+    console.log(anotherPerson);
+    anotherPerson.friends.push("Rob");
+    var yetAnotherPerson = Object.create(person);
+    console.log(yetAnotherPerson);
+    yetAnotherPerson.name = "Linda";
+    yetAnotherPerson.friends.push("Barbie");
+    console.log(person.friends); //"Shelby,Court,Van,Rob,Barbie"
+
+</script>
+</html>

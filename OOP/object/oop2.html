@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Constructor Pattern</title>
+</head>
+<body>
+
+</body>
+<script>
+    //2.构造函数模式
+    //构造函数的函数名惯例首字母大写 必须使用new操作符才能创建实例 否则为普通调用函数
+    function Person(name, age, job) {
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.sayName = function () {
+            console.log(this.name);
+        }
+    }
+    var person1 = new Person("PC", 22, "Software Engineer");
+    var person2 = new Person("CBY", 22, "Teacher");
+    //person1和person2的constructor属性都指向构造函数Person
+    console.log(person1.constructor);
+    console.log(person2.constructor);
+    //解决了对象识别的问题 person1和person2既是Object的实例，也是Person的实例
+    //创建自定义的构造函数意味着将来可以将它的实例标识为一种特定的类型
+    console.log(person1 instanceof Person);//true
+    console.log(person2 instanceof Person);//true
+    //构造函数的问题
+    //构造函数里的每个方法都要在每个实例上重新创建一遍，不同实例上的同名函数是不相等的
+    //如果将公共方法指向外部的全局作用域的函数 将会定义大量的全局函数 更加是个灾难
+    console.log(person1.sayName==person2.sayName);//false
+</script>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prototype Chain</title>
+</head>
+<body>
+
+</body>
+<script>
+    //原型链
+    function SuperType() {
+        this.property = true;
+    }
+    SuperType.prototype.getSuperValue = function () {
+        return this.property;
+    };
+    function SubType() {
+        this.subproperty = false;
+    }
+    //继承了 SuperType
+    SubType.prototype = new SuperType();
+    SubType.prototype.getSubValue = function () {
+        return this.subproperty;
+    };
+    var instance = new SubType();
+    console.log(instance.getSuperValue()); //true
+    console.log(instance.getSubValue()); //false
+    //确定原型和实例的关系
+    //测试实例与原型链之间的关系
+    console.log(instance instanceof Object); //true
+    console.log(instance instanceof SuperType); //true
+    console.log(instance instanceof SubType); //true
+    //使用 isPrototypeOf() 方法。同样，只要是原型链中出现过的原型
+    // 都可以说是该原型链所派生的实例的原型
+    console.log(Object.prototype.isPrototypeOf(instance)); //true
+    console.log(SuperType.prototype.isPrototypeOf(instance)); //true
+    console.log(SubType.prototype.isPrototypeOf(instance)); //true
+    console.log(Object.getPrototypeOf(SubType.prototype));
+    console.log(instance.constructor);
+</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parasitic</title>
+</head>
+<body>
+
+</body>
+<script>
+    //寄生式（ parasitic）继承
+    //寄生式继承的思路与寄生构造函数和工厂模式类似，即创建一个仅用于封装继承过程的函数，
+    //该函数在内部以某种方式来增强对象，最后再像真地是它做了所有工作一样返回对象。
+    function createAnother(original) {
+        var clone = Object.create(original); //通过调用函数创建一个新对象
+        clone.sayHi = function () { //以某种方式来增强这个对象
+            console.log("hi");
+        };
+        return clone; //返回这个对象
+    }
+
+    var person = {
+        name: "Nicholas",
+        friends: ["Shelby", "Court", "Van"]
+    };
+    var anotherPerson = createAnother(person);
+    anotherPerson.sayHi(); //"hi"
+    //使用寄生式继承来为对象添加函数，会由于不能做到函数复用而降低效率；
+    //这一点与构造函数模式类似。
+
+    //寄生组合式继承
+    //所谓寄生组合式继承，即通过借用构造函数来继承属性，通过原型链的混成形式来继承方法。
+    //其背后的基本思路是：不必为了指定子类型的原型而调用超类型的构造函数，我们所需要的无非就是超类型
+    //原型的一个副本而已。本质上，就是使用寄生式继承来继承超类型的原型，然后再将结果指定给子类型的原型
+
+    function inheritPrototype(subType, superType) {
+        //超类型原型的一个副本
+        var prototype = Object.create(superType.prototype); //创建对象
+        prototype.constructor = subType; //增强对象
+        subType.prototype = prototype; //指定对象
+    }
+    function SuperType(name) {
+        this.name = name;
+        this.colors = ["red", "blue", "green"];
+    }
+    SuperType.prototype.sayName = function () {
+        alert(this.name);
+    };
+    function SubType(name, age) {
+        SuperType.call(this, name);
+        this.age = age;
+    }
+    inheritPrototype(SubType, SuperType);
+    SubType.prototype.sayAge = function () {
+        alert(this.age);
+    };
+    var sub1 = new SubType("PC", 22);
+    sub1.sayName();
+
+    //这个例子的高效率体现在它只调用了一次 SuperType 构造函数，并且因此避免了在 SubType
+    //prototype 上面创建不必要的、多余的属性。与此同时，原型链还能保持不变；因此，还能够正常使用
+    //instanceof 和 isPrototypeOf() 。开发人员普遍认为寄生组合式继承是引用类型最理想的继承范式。
+</script>
+</html>

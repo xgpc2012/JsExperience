@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Combination inheritance</title>
+</head>
+<body>
+
+</body>
+<script>
+    //组合继承
+    //组合使用原型链和借用构造函数的技术组合到一块
+    //通过原型链实现对原型属性和方法的继承
+    //通过借用构造函数来实现对实例属性的继承
+    function Parent(name){
+        this.name=name;
+        this.colors=["red","blue"];
+    }
+
+    Parent.prototype.sayName=function(){
+        console.log(this.name);
+    }
+
+    function Child(name,age){
+        Parent.call(this,name);
+        this.age=age;
+    }
+
+    //继承方法
+    Child.prototype=new Parent();
+    //重写原型的构造函数属性值(默认指向父类)
+    Child.prototype.constructor=Child;
+    Child.prototype.sayAge= function () {
+        console.log(this.age);
+    }
+
+    var child1=new Child("PC","22");
+    var child2=new Child("CBY","21");
+    child1.sayAge();
+    child2.sayAge();
+    child1.sayName();
+    child2.sayName();
+    console.log(child1);
+    //组合继承避免了原型链和借用构造函数的缺陷，融合了它们的优点
+    //成为JavaScript 中最常用的继承模式
+    //而且instanceof 和 isPrototypeOf() 也能够用于识别基于组合继承创建的对象
+    console.log(Child.prototype.__proto__==Parent.prototype);
+</script>
+</html>
