@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>获取某个地区的天气信息</h1>
+<input type="text" placeholder="请输入你想要查询的地区" id="area">
+<button id="btn1">点击我查询天气信息哦</button>
+<div id="result"></div>
+</body>
+<!--使用CDN的方式引入jquery-->
+<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+<script>
+    //开始我们的第一个AJAX请求
+    //点击按钮
+    $("#btn1").click(function () {
+        //获取表单里填写的地址信息
+        //这个地址是请求时我们需要提供的传入参数
+        var area = $("#area").val();
+        //开始执行一个最简单的AJAX请求
+        $.ajax({
+            //你请求的地址
+            url: "http://route.showapi.com/9-2",
+            //你请求的方式
+            type: "GET",
+            data: {
+                //这两个是shopapi网址提供接口必传的参数
+                showapi_appid:"5668",
+                showapi_sign:"000bca6e40344eafb11c68cf28a8bf43",
+                //真正我们传入的是下面的地址参数
+                area: area
+            },
+            //返回值类型JSON
+            dataType: "json",
+            success: function (data) {
+                //data是从服务器端返回来的数据
+                alert(JSON.stringify(data));
+            },
+            error: function () {
+                //如果请求失败
+                alert("请求失败");
+            }
+        })
+    })
+</script>
+</html>
