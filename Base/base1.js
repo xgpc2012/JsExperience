@@ -1,22 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Examples</title>
-<meta name="description" content="">
-<meta name="keywords" content="">
-<link href="" rel="stylesheet">
-</head>
-<body>
-</body>
-<script>
-for (var i = 0; i < 5; i++) {
-	setTimeout(function() {
-		//console.log(i);
-	}, i * 1000);
-}
-
+/**
+ * Created by pc on 2017/9/12.
+ */
 //逻辑或返回第一个是 true 的操作数 或者 最后一个是 false的操作数
 console.log("0 || 1 = "+(0 || 1));
 console.log("1 || 2 = "+(1 || 2));
@@ -44,5 +28,3 @@ var a={},
 
 a[b]=123;
 a[c]=456;
-</script>
-</html>
