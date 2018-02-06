@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script src="jquery-3.2.1.js"></script>
+<script>
+    //extend扩展对象参数(有则覆盖 无则替换)
+    var json = {
+        "a": "1",
+        "b": "2"
+    };
+
+    $.extend(json, {"a": "3"});
+    console.log(json);
+</script>
+</html>
