@@ -11,6 +11,16 @@
         this.prototype[name]=func;
         return this;
     };
+
+    function test() {
+        console.log(1)
+    }
+
+    test.method("test01",function () {
+        console.log(2)
+    })
+
+    console.log(test.prototype);
     //使用//注释
     //标识符由一个字母开头 后跟字母 数字 或者下划线
 </script>

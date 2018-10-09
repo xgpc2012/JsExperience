@@ -9,6 +9,7 @@ function querySearch(name,url){
     var qstr=url.split("?")[1];
     var arr1=qstr.split("&");
     var obj={};
+    
     arr1.forEach(function (item) {
         var iarr=item.split("=");
         obj[iarr[0]]=iarr[1];
