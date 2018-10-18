@@ -2,7 +2,6 @@
  * Created by pc on 2017/9/12.
  */
 //查询url字符串
-//查询url字符串
 var url1="http://mail.163.com/?a=1&b=2&c=3&d=xxx&e";
 function querySearch(name,url){
     url=decodeURIComponent(url);
@@ -16,7 +15,7 @@ function querySearch(name,url){
     },this);
     return obj[name]?obj[name]:"";
 }
-//console.log(querySearch("a",url1));
+console.log(querySearch("a",url1));
 
 //获取最大公约数
 function getMaxCommonDivisor(num1,num2){
@@ -41,5 +40,7 @@ function getMinCommonMultiple(num1,num2){
     }
 }
 
-//console.log(getMaxCommonDivisor(4,18));
+//2
+console.log(getMaxCommonDivisor(4,18));
+//21
 console.log(getMinCommonMultiple(3,7));

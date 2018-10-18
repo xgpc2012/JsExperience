@@ -7,3 +7,11 @@ function getSortStr(data) {
     sArr.sort();  // 数组排序
     return sArr.join('&');
 }
+
+var data={
+    "mobileNo":"15827523228",
+    "userId":"1",
+    "cardNo":"6214830279228042"
+};
+
+console.log(getSortStr(data));
