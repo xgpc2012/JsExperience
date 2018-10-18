@@ -1,14 +1,12 @@
 //将JSON参数字典排序
 function getSortStr(data) {
-    var sArr = [];
-    for (var i in data) {
-        sArr.push(i + '=' + data[i]);
-    }
+    let sArr = [];
+    for (let i in data) sArr.push(i + '=' + data[i]);
     sArr.sort();  // 数组排序
     return sArr.join('&');
 }
 
-var data={
+let data={
     "mobileNo":"15827523228",
     "userId":"1",
     "cardNo":"6214830279228042"

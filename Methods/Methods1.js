@@ -2,16 +2,16 @@
  * Created by pc on 2017/9/12.
  */
 //查询url字符串
-var url1="http://mail.163.com/?a=1&b=2&c=3&d=xxx&e";
+let url1="http://mail.163.com/?a=1&b=2&c=3&d=xxx&e";
 function querySearch(name,url){
     url=decodeURIComponent(url);
-    var qstr=url.split("?")[1];
-    var arr1=qstr.split("&");
-    var obj={};
+    let qStr=url.split("?")[1];
+    let arr1=qStr.split("&");
+    let obj={};
     
     arr1.forEach(function (item) {
-        var iarr=item.split("=");
-        obj[iarr[0]]=iarr[1];
+        let iArr=item.split("=");
+        obj[iArr[0]]=iArr[1];
     },this);
     return obj[name]?obj[name]:"";
 }
@@ -19,10 +19,9 @@ console.log(querySearch("a",url1));
 
 //获取最大公约数
 function getMaxCommonDivisor(num1,num2){
-    var minNum=num1>num2?num2:num1;
-    var i=minNum;
+    let i=num1 > num2 ? num2 : num1;
     for(i;i>0;i--){
-        if(num1%i==0&&num2%i==0){
+        if(num1%i===0&&num2%i===0){
             return i;
         }
     }
@@ -30,11 +29,10 @@ function getMaxCommonDivisor(num1,num2){
 
 //获取最小公倍数
 function getMinCommonMultiple(num1,num2){
-    var worst=num1*num2;//最坏的情况
-    var maxNum=num1<num2?num2:num1;
-    var i=maxNum;
+    let worst=num1*num2;//最坏的情况
+    let i=num1 < num2 ? num2 : num1;
     for(i;i<=worst;i++){
-        if(i%num1==0&&i%num2==0){
+        if(i%num1===0&&i%num2===0){
             return i;
         }
     }
